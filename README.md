@@ -25,7 +25,7 @@ Exception precedence from highest to lowest is listed below:
 <br>Example 1: while threadA is waiting, if both of these happen before threadA can re-acquire the lock to get back from wait: i) threadB calls shutdown() and then ii) threadC interrupts threadA, the result should be that threadA throws InterruptedException.
 <br>Example 2: while threadA is waiting with a timeout, if both of these happen before threadA can re-acquire the lock to get back from wait: i) threadB calls shutdown() and then ii) threadA times out, the result should be that threadA throws ShutdownException.
 <br>Example 3: while threadA is waiting inside pass(), if both of these happen before threadA can re-acquire the lock to get back from wait: i) threadB calls shutdown() and then ii) threadC calls pass(), the result should be that threadC should throw ShutdownException< (not IllegalStateException!) AND threadA should throw ShutdownException.
-<br><br><br><br>How to run the project...
+<br><br><br><br>**How to run the project...**
 <br>Go to PROJ_ThreadRendezvous/src/java/com/abc/handoff/test
 <br>run TestStringHandoff.java
 <br><img width="1440" alt="Screen Shot 2022-12-09 at 10 14 17 PM" src="https://user-images.githubusercontent.com/6142997/206828411-b5153bbf-cf05-4620-ad2a-88a3452ed09e.png">
