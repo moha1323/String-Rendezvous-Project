@@ -17,9 +17,11 @@ After threadA has already called shutdown(), if threadB calls pass(String), pass
 If threadA is waiting inside pass(String), pass(String, long), receive(), or receive(long) and threadB calls shutdown(), threadA should stop waiting and throw ShutdownException.
 ShutdownException is a RuntimeException.
 <br><br>**Exception Precedence**<br><br>
-_Exception precedence from highest to lowest is listed below:_
-1. InterruptedException 2. ShutdownException
-3. IllegalStateException 4. TimedOutException
-Example 1: while threadA is waiting, if both of these happen before threadA can re-acquire the lock to get back from wait: i) threadB calls shutdown() and then ii) threadC interrupts threadA, the result should be that threadA throws InterruptedException.
-Example 2: while threadA is waiting with a timeout, if both of these happen before threadA can re-acquire the lock to get back from wait: i) threadB calls shutdown() and then ii) threadA times out, the result should be that threadA throws ShutdownException.
-Example 3: while threadA is waiting inside pass(), if both of these happen before threadA can re-acquire the lock to get back from wait: i) threadB calls shutdown() and then ii) threadC calls pass(), the result should be that threadC should throw ShutdownException< (not IllegalStateException!) AND threadA should throw ShutdownException.
+Exception precedence from highest to lowest is listed below:
+1. InterruptedException<br>
+2. ShutdownException<br>
+3. IllegalStateException<br>
+4. TimedOutException
+<br>Example 1: while threadA is waiting, if both of these happen before threadA can re-acquire the lock to get back from wait: i) threadB calls shutdown() and then ii) threadC interrupts threadA, the result should be that threadA throws InterruptedException.
+<br>Example 2: while threadA is waiting with a timeout, if both of these happen before threadA can re-acquire the lock to get back from wait: i) threadB calls shutdown() and then ii) threadA times out, the result should be that threadA throws ShutdownException.
+<br>Example 3: while threadA is waiting inside pass(), if both of these happen before threadA can re-acquire the lock to get back from wait: i) threadB calls shutdown() and then ii) threadC calls pass(), the result should be that threadC should throw ShutdownException< (not IllegalStateException!) AND threadA should throw ShutdownException.
